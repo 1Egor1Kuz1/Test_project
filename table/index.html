@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Ввод данных</title>
+</head>
+<body>
+    <div class="form">
+    <h1 class="form_title">Введите данные</h1>
+       
+    <form action="/" method="POST" id="user-form" >
+       
+        <div class="field_1">             
+            <input type="text" class="form_input" name="name"  placeholder="Введите имя" required>
+       
+            <input type="number" class="form_input" name="age"  placeholder="Введите возраст"  min=1 max=110 onkeyup=imposeMinMax(this) required>
+        </div>
+    
+        <div class="field_1">
+            <input type="text" class="form_input" name="adress" placeholder="Укажите адрес" required> 
+        
+            <input type="date" class="form_input" name="date" placeholder="Дата" >
+        </div>
+        
+        <div class="field_1">
+           
+            <select name="family_status" id="family_status" class="form_select">
+                <option value="">семейное положение</option>
+                <option value="В отношениях">В отношениях</option>
+                <option value="Вне отношений">Вне отношений</option>
+            </select>
+
+            <select name="country" id="country" class="form_select" required>
+                <option value="">Выберите страну</option>
+                <option value="США">США</option>
+                <option value="Россия">Россия</option>
+                <option value="Польша">Польша</option>
+            </select>
+        </div>
+
+        <h3 class="form_text"> Выберите пол</h3>
+
+        <div class="field">
+            <div class="form_radio_btn">
+                <input type="radio" class="form_radio" class="form_input" name="male" id="male" checked name="rd1" value="Мужской" required>
+                <label for="male">Мужской</label>
+            </div>
+
+            <div class="form_radio_btn">
+                <input type="radio" name="male" id="female"  value="Женский">
+                <label for="female">Женский</label>
+            </div>
+        </div>  
+
+<h3 class="form_text">Выберите цвет вашей строки</h3>
+
+<div class="form_color">
+        <input id="select-color" type="color" name="selector_color" class="form_input" value="#FF00FF" >
+</div>
+
+    <button class="form_button" type="submit">Готово</button>
+        
+    </form>
+</div>
+
+<div class="table">
+    <table width="800">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th> Возраст</th>
+                <th> Адрес</th>
+                <th> Дата</th>
+                <th> Семейное положение</th>
+                <th>Страна</th>
+                <th>Пол</th>
+            </tr>
+        </thead>
+
+        <tbody id="users-table"></tbody>
+
+    </table>
+</div>
+
+<script src="work.js"></script>
+</body>
+</html>
