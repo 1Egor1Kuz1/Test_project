@@ -71,9 +71,7 @@ function addToStorage(row){}
 // table_color
 
 function selectColor(){
-    // присваиваю lastRow последнюю строку таблицы
     let lastRow = table.rows[ table.rows.length - 1 ];
-    // ну и остальное...
     const color = document.forms[0].elements.selector_color.value;
     lastRow.style.backgroundColor = color;
 }
