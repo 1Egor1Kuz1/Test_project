@@ -11,14 +11,32 @@ userForm.addEventListener('submit', (e) => {
 
     const formData = getFormData();
 
-    tableData.push(formData);
+    addToTableData(formData);
+
     drawTable(tableData, table);
+
     saveToStorage(tableStoreKey, tableData);
 })
 
+function addToTableData(data) {
+    tableData.push(data);
+}
+
+function deleteFromTableData(index) {
+    tableData.splice(index, 1);
+}
+
+function deleteItemAndDraw(index) {
+    deleteFromTableData(index);
+
+    drawTable(tableData, table);
+
+    saveToStorage(tableStoreKey, tableData);
+}
+
 function drawTable(rows, tableElement) {
     clearTable(tableElement);
-    rows.forEach((row) => addTableRow(row, tableElement));
+    rows.forEach((row, index) => addTableRow(row, tableElement, index));
 
     function clearTable(table) {
         table.innerHTML = '';
@@ -50,7 +68,7 @@ function getFormData() {
 }
 
 
-function addTableRow(row, table) {
+function addTableRow(row, table, index) {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     const tdAge = document.createElement('td');
@@ -59,6 +77,8 @@ function addTableRow(row, table) {
     const tdDate = document.createElement('td')
     const tdMale = document.createElement('td');
     const tdFamstat = document.createElement('td');
+    const tdWithButton = document.createElement('td');
+    const deleteButton = createButton(() => deleteItemAndDraw(index));
 
     tr.style.backgroundColor = row.color;
 
@@ -70,6 +90,8 @@ function addTableRow(row, table) {
     tdMale.innerText = row.male;
     tdFamstat.innerText = row.family_status;
 
+    tdWithButton.appendChild(deleteButton);
+
     tr.appendChild(tdName);
     tr.appendChild(tdAge);
     tr.appendChild(tdAdress)
@@ -77,6 +99,7 @@ function addTableRow(row, table) {
     tr.appendChild(tdFamstat)
     tr.appendChild(tdCountry);
     tr.appendChild(tdMale);
+    tr.appendChild(tdWithButton);
     table.appendChild(tr);
 }
 
@@ -90,4 +113,11 @@ function imposeMinMax(el) {
         }
     }
 }
- 
+
+function createButton(clickHandler) {
+    const button = document.createElement('button');
+    button.addEventListener('click', () => clickHandler());
+    button.innerText = 'x';
+
+    return button;
+}
